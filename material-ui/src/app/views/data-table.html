@@ -1,0 +1,37 @@
+<!-- TODO: Replace table to table component when https://github.com/angular/material/issues/796 will closed -->
+<div class="table-responsive-vertical md-whiteframe-z1">
+    <md-progress-linear ng-if="vm.dataLoading" md-mode="query"></md-progress-linear>
+    <table ng-if="!vm.dataLoading" id="table" class="table table-hover table-bordered">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Policy No</th>
+            <th>Claim Reported Date</th>
+            <th>Policy Type</th>
+            <th>Policy Sub Type</th>
+            <th>Claimed Amount</th>
+            <th>Claim Status</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="data in vm.tableData track by $index">
+            <td data-title="ID">{{data.sno}}</td>
+            <td data-title="PolicyNo">{{data.policyNumber}}</td>
+            <td data-title="ClaimReportDate" data-ng-bind="vm.getDate(data.claimReportedDate.$date)"></td>
+            <td data-title="PolicyType">{{data.policyType}}</td>
+            <td data-title="PolicySubType">{{data.policySubType}}</td>
+            <td data-title="ClaimedAmount">{{data.claimedAmount}}</td>
+            <td data-title="ClaimStatus">
+                <i class="material-icons" ng-if="data.claimStatus===1">check_circle</i>
+                <i class="material-icons" ng-if="data.claimStatus===0">assignment_late</i>
+            </td>
+            <td data-title="Action">
+                <md-progress-linear ng-show="vm.isClaimBeingProcessed(data)" md-mode="query"></md-progress-linear>
+                <md-button flex ng-disabled="!vm.isClaimBeingProcessed(data) && vm.isProcessRunnning" ng-if="data.claimStatus===0" class="md-raised md-warn" ng-click="vm.closeClaim(data)">Close Claim</md-button>
+                <md-button flex ng-disabled="!vm.isClaimBeingProcessed(data) && vm.isProcessRunnning" ng-if="data.claimStatus===1" class="md-raised md-primary" ng-click="vm.reopenClaim(data)">Reopen Claim</md-button>
+            </td>
+         </tr>
+        </tbody>
+    </table>
+</div>
