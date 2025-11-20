@@ -8,7 +8,7 @@ The nature of the app is relatively less write and more of database reads. We al
 Out of the 2 databases considered MongoDb is well suited for larger amount of data and is scalable as well.
 
 How to run:
-The app has 2 components an angular js based UI https://github.com/PriyankaJesudhas/PWT/tree/master/material-ui and Python flask based API https://github.com/PriyankaJesudhas/PWT/tree/master/python-flask-api
+The app has 2 components an angular js based UI and Python flask based API 
 
 The UI can be started by running GULP task serve using the command "gulp serve"
 
